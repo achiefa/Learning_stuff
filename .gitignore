@@ -1,0 +1,10 @@
+# CMake
+CMakeCache.txt
+*.cmake
+Makefile
+CMakeFiles
+
+#C++
+*
+!*/
+!*.*
