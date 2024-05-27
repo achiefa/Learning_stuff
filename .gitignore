@@ -9,3 +9,6 @@ CMakeFiles
 !*/
 !*.*
 build
+
+# VScode
+.vscode
