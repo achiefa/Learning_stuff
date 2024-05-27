@@ -4,5 +4,10 @@ project(CppStuff CXX)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 enable_testing()
-
 add_subdirectory(Forwarding_reference)
+add_subdirectory(crtp)
+add_subdirectory(Factories)
+#message(BINARY="${CMAKE_BINARY_DIR}")
+#message(CURRENT_BINARY="${CMAKE_CURRENT_BINARY_DIR}")
+#message(PROJECT_SOURCE_DIR="${CMAKE_SOURCE_DIR}")
+#message(CURRENT_SOURCE="${CMAKE_CURRENT_SOURCE_DIR}")
