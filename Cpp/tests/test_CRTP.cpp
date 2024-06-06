@@ -96,6 +96,7 @@ private:
     return;
   }
 };
+template<typename D, int _RANK> std::string IObservable<D,_RANK>::id_base2 = IObservable::static_id2<D>();
 
 /**
  * @brief Basic decorator
@@ -179,7 +180,7 @@ public:
   }
 };
 template<> std::string IObservable<dNN,3>::id_base = IObservable::static_id(dNN());
-template<> std::string IObservable<dNN,3>::id_base2 = IObservable::static_id2<dNN>();
+
 
 class ddNN : public BASIC<ddNN, 4> {
   // At this point I need to specify the dimensions
@@ -226,7 +227,6 @@ public:
   }
 };
 template<> std::string IObservable<O2,4>::id_base = IObservable::static_id(O2());
-template<> std::string IObservable<O2,4>::id_base2 = IObservable::static_id2<O2>();
 
 class O3 : public COMBINED<O3, 6> {
   // At this point I need to specify the dimensions
