@@ -20,17 +20,14 @@ endif(NNAD_CONFIG)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${NNAD_CFLAGS}")
 
-add_executable(test1
-   test1.cpp
-  )
-
-add_executable(test_simplified
- test_simplified.cpp
-)
+add_executable(test1 test1.cpp)
+add_executable(policy test_policy.cpp)
+add_executable(crtp test_CRTP.cpp)
 
 set_target_properties(
+  crtp
   test1
-  test_simplified
+  policy
   PROPERTIES
   FOLDER "tets"
   )
