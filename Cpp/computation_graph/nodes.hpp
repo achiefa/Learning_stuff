@@ -1,0 +1,10 @@
+#include "node.hpp"
+#include "linear_node.hpp"
+#include "input_node.hpp"
+#include "activation_node.hpp"
+#include "tanh.hpp"
+#include "identity.hpp"
+#include "custom_activation_function.hpp"
+#include "distribution_policies.hpp"
+
+//#include "./sigmpoid.hpp"
