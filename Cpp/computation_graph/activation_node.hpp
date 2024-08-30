@@ -1,11 +1,8 @@
 #include "./node.hpp"
+#include "utils.hpp"
 
 #ifndef INCLUDE_ACTIVATION_NODE
 #define INCLUDE_ACTIVATION_NODE
-
-template <typename Func, typename Arg>
-concept Callable = requires(Func f, Arg arg) 
-  { { f(arg) } -> std::same_as<Arg>; };
 
 template <typename ActivationPolicy>
 requires Callable <ActivationPolicy, Eigen::VectorXd>
@@ -17,7 +14,9 @@ class Activation : public Node
                const ActivationPolicy& act_policy = ActivationPolicy())
     : act_policy_(act_policy),
       Node(std::forward<VecDep>(dependencies), std::forward<std::string>(Id))
-    { /* do nothing */}
+    { 
+      outSize_ = inSize_ = dependencies_[0]->GetOutSize();
+    }
 
     ~Activation() {}
     
@@ -32,8 +31,18 @@ class Activation : public Node
 
     virtual void gradient(Eigen::Block<Eigen::MatrixXd,-1,-1>&& g) override {}
 
-    virtual void backward() override {}
+    virtual void backward() override 
+    {
+      Eigen::MatrixXd TemporaryMat (outSize_, outSize_);
+      TemporaryMat.diagonal() = act_policy_.Derive(dependencies_[0]->GetValue());
+      auto test = dependencies_[0]->GetGradient()  + gradient_ * TemporaryMat;
+      dependencies_[0]->SetGradient(dependencies_[0]->GetGradient()  + gradient_ * TemporaryMat);
+    }
 
+    void initialise_gradients(size_t row)
+    { 
+      SetGradient(Eigen::MatrixXd::Zero(row, outSize_));
+    }
   private:
     ActivationPolicy act_policy_;
 };

@@ -1,36 +1,41 @@
-#include "nodes.hpp"
+#include <eigen3/Eigen/Eigen>
+#include <iostream>
+
+/*template <template<typename> typename distribution, typename RNG = std::mt19937, typename ...Args>
+requires std::uniform_random_bit_generator<RNG>
+void RandomInit(RNG* g, std::tuple<Args...> tuple)
+{
+  auto Is = std::index_sequence_for<Args...>{};
+  auto d = distribution<RNG>(g, get<Is>(tuple)...);
+  std::cout << d() << std::endl;
+}*/
+
+template <typename Tuple, std::size_t... Is>
+void Easy(const Tuple& t,  
+          std::index_sequence<Is...>)
+{
+  (
+    (std::cout << (Is ? ", " : "") << std::get<Is>(t))
+    , ...);
+}
+
+template <typename ...Args>
+void printEasy(const std::tuple<Args...>& t)
+{
+  Easy(t, std::index_sequence_for<Args...>{});
+}
 
 
-class my_rng{};
 
 int main()
 {
-  Eigen::MatrixXd mat;
-  //std::default_random_engine g_1;
-  //Generator generator = g_1;
-  size_t row = 5;
-  size_t col = 5;
-  std::mt19937 g1(10);
-  std::mt19937 g2(10);
+  Eigen::MatrixXd mat (5,5);
+  mat.setOnes();
+  Eigen::VectorXd vec(5);
+  vec << 1,2,3,4,5;
+  mat.diagonal() = vec;
+  std::cout << mat << std::endl;
 
-
-  //mat = RandomInit<Gaussian>(row, col, &g_mt19937, 10., 0.5);
-  //std::cout << mat << std::endl;
-
-  std::normal_distribution d (0.0,1.0);
-  std::cout << d(g1) << std::endl;
-  std::cout << d(g1) << std::endl;
-  std::cout << d(g1) << std::endl;
-  std::cout << d(g1) << std::endl;
-  std::cout << d(g1) << std::endl;
-  std::cout << d(g1) << std::endl;
-  std::cout << "______________" << std::endl;
-  std::cout << d(g2) << std::endl;
-  std::cout << d(g2) << std::endl;
-  std::cout << d(g2) << std::endl;
-  std::cout << d(g2) << std::endl;
-  std::cout << d(g2) << std::endl;
-  std::cout << d(g2) << std::endl;
 
   return 0;
 }

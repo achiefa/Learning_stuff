@@ -28,9 +28,19 @@ class TanhTemplate
       return tanh(x);
     }
 
+    double Derive(const double& x)
+    {
+      return 1 - tanh(x) * tanh(x);
+    }
+
     MatType Evaluate(const MatType& mat)
     {
       return EvaluationPolicy<MatType>::eval_element_wise(mat, [this](const double& x){ return Evaluate(x); });
+    }
+
+    MatType Derive(const MatType& mat)
+    {
+      return EvaluationPolicy<MatType>::eval_element_wise(mat, [this](const double& x){ return Derive(x); });
     }
 
     MatType operator()(const MatType& mat)

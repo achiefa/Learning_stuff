@@ -11,8 +11,18 @@ if(NOT TARGET spdlog)
     find_package(spdlog REQUIRED)
 endif()
 
-#add_executable(app app.cpp )
-add_executable(app test.cpp)
+find_program(NNAD_CONFIG nnad-config REQUIRED)
+if (NNAD_CONFIG)
+    exec_program(${NNAD_CONFIG}
+        ARGS --cflags
+        OUTPUT_VARIABLE NNAD_CFLAGS
+    )
+    set(NNAD_CFLAGS ${NNAD_CFLAGS} CACHE STRING INTERNAL)
+endif(NNAD_CONFIG)
+
+add_executable(app test_NNAD.cpp)
+#add_executable(app app.cpp)
+target_compile_options(app PUBLIC ${NNAD_CFLAGS})
 target_link_libraries(app PRIVATE spdlog::spdlog $<$<BOOL:${MINGW}>:ws2_32>)
 target_include_directories(app PUBLIC ./)
 

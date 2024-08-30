@@ -11,13 +11,15 @@ class Input : public Node
 { 
   public:
     Input(size_t&& size, VecDep&& dependencies = {}, std::string&& Id = std::string("input"))
-    : inputSize_(std::move(size)),
-      Node(std::forward<VecDep>(dependencies), std::forward<std::string>(Id))
-    { /* do nothing */}
+    : Node(std::forward<VecDep>(dependencies), std::forward<std::string>(Id))
+    { 
+      outSize_ = std::move(size);
+    }
 
     ~Input() {}
     
-    void forward() override { dirtyFlag_ = true; }
+    void forward() override { 
+      dirtyFlag_ = true; }
 
     void dependency_rule() override {}
 
@@ -29,7 +31,6 @@ class Input : public Node
     }
 
   private:
-    size_t inputSize_;
 
     //void backward() override {}
     //void gradient() override {}

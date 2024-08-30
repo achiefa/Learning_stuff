@@ -1,63 +1,34 @@
 #include "./node.hpp"
 #include "distribution_policies.hpp"
+#include "utils.hpp"
 #include <eigen3/unsupported/Eigen/CXX11/Tensor>
 #ifndef INCLUDE_LINEAR_NODE
 #define INCLUDE_LINEAR_NODE
 
 /**
  * @todo
- * - Custom initialisation is missing
- * - Backward is still missing
- * - Gradient is still missing
  * - copy constructor
  * - move constructor
  * - assignment operator
  * - ...
  * 
  */
-
-// Implementation details
-class recursive_functor {
-  const Eigen::VectorXd& m_vec;
-public:
-  recursive_functor(const Eigen::VectorXd& arg) : m_vec(arg) {}
- 
-  const typename Eigen::VectorXd::Scalar& operator() (Eigen::Index row, Eigen::Index col) const {
-    Eigen::Index interval = col - row * m_vec.size();
-    if (interval >= 0 && interval < m_vec.size()){
-      return m_vec(col % m_vec.size());
-    }
-    else {
-      static const double return_null = 0;
-      return return_null;
-    }
-  }
-};
-
-
-Eigen::CwiseNullaryOp<recursive_functor, typename Eigen::MatrixXd>
-makeRecursive(const Eigen::VectorXd& arg1, Eigen::Index rows, Eigen::Index cols)
-{
-  return Eigen::MatrixXd::NullaryExpr(rows, cols, recursive_functor(arg1.derived()));
-}
-
-
-template <typename InitDistribution>
 class Linear : public Node
 { 
   public:
     Linear(size_t&& size, 
            VecDep&& dependencies, 
-           std::string&& Id,
-           const InitDistribution& distribution = InitDistribution())
-    : InitDistribution_(distribution),
-      Node(std::forward<VecDep>(dependencies), std::forward<std::string>(Id))
+           std::string&& Id)
+    : Node(std::forward<VecDep>(dependencies), std::forward<std::string>(Id))
     {
       outSize_ = size;
       if (!dependencies_.empty()) {
         inSize_ = dependencies_[0]->GetOutSize();
       }
       numberOfParameters_ = outSize_ * (inSize_ + 1);
+
+      number_of_biases = outSize_;
+      number_of_weights = outSize_ * inSize_;
     }
 
     virtual ~Linear() {}
@@ -76,6 +47,9 @@ class Linear : public Node
     virtual void backward() override 
     { 
       // I need to use `SetGradient` and `GetGradient` because the getter method is const.
+      // This is a rather generic implementation of the backward pass, and I think that could
+      // be implemented in the base class. The part that is specific to the particular type of
+      // node (the linear node in this case) is `gradient * weight`
       dependencies_[0]->SetGradient(dependencies_[0]->GetGradient()  + gradient_ * weights_);
     }
 
@@ -91,11 +65,27 @@ class Linear : public Node
       g = gradient_ * Grad_;
     }
 
-    virtual void initialise_parameters(bool force = false)
+    void setWeights(const Eigen::MatrixXd& weights) 
+    {
+      weights_ = weights;
+    }
+
+    void setBiases(const Eigen::VectorXd& biases) 
+    {
+      biases_ = biases;
+    }
+
+    Eigen::MatrixXd GetWeights () const { return weights_; }
+    Eigen::VectorXd GetBiases() const { return biases_; }
+
+    template <template<typename> typename distribution = Gaussian, typename RNG, typename ...Params>
+    void initialise_parameters(RNG* rng, 
+                               const std::tuple<Params...>& t = std::tuple<double,double>(0.,1.), 
+                               bool force = false)
     {
       if (!initialisedParameters_ || force) {
-        weights_ = RandomInit<Gaussian>(outSize_, inSize_, InitDistribution_);
-        biases_ = Eigen::VectorXd::NullaryExpr(outSize_, InitDistribution_);
+        weights_ = RandomInit<distribution>(outSize_, inSize_, rng, t);
+        biases_ = RandomInit<distribution>(outSize_, rng, t);
         initialisedParameters_ = true;
       }
     }
@@ -111,21 +101,26 @@ class Linear : public Node
       }
     }
 
-    virtual void initialise(size_t row, bool force = false)
+    template <template<typename> typename distribution = Gaussian, typename RNG, typename ...Params>
+    void initialise(size_t row, 
+                    RNG* rng, 
+                    const std::tuple<Params...>& t = std::tuple<double,double>(0.,1.),
+                    bool force = false)
     {
-      initialise_parameters(force);
+      initialise_parameters(rng, t, force);
       initialise_gradients(row, force);
     }
 
     size_t getParNumber() const { return numberOfParameters_; }
+    size_t number_of_weights;
+    size_t number_of_biases;
 
   private:
     Eigen::MatrixXd weights_;
     Eigen::VectorXd biases_;
-    Eigen::MatrixXd Grad_;
+    Eigen::MatrixXd Grad_; // This is really an auxiliary matrix
     bool initialisedGradients_ = false;
     bool initialisedParameters_ = false;
     size_t numberOfParameters_;
-    InitDistribution InitDistribution_;
 };
 #endif

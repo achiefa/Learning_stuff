@@ -38,7 +38,6 @@ class Node
 
     virtual void setValues(Eigen::VectorXd&& x)
     { 
-      spdlog::info("Setting input data");
       value_ = std::move(x);
       dirtyFlag_ = false;
     }
