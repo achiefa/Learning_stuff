@@ -3,9 +3,11 @@
 #ifndef INCLUDE_INPUT_NODE
 #define INCLUDE_INPUT_NODE
 
+
 /**
  * @brief Specification of the linear class for the input case.
  * 
+ * @todo This class should be revisited...
  */
 class Input : public Node
 { 
