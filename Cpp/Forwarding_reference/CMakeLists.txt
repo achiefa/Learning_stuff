@@ -9,10 +9,6 @@ if (NOT ${CMAKE_CURRENT_SOURCE_DIR} EQUAL ${CMAKE_SOURCE_DIR})
   project(${CMAKE_CURRENT_SOURCE_DIR}) 
 endif()
 
-add_executable(std_forward_1
-    std_forward_1.cc
-   )
-
 add_executable(std_forward_wrong
    std_forward_wrong.cc
   )
@@ -22,7 +18,7 @@ debug_decorator.cc
 )
 
 set_target_properties(
-   std_forward_1
+#   std_forward_1
    std_forward_wrong
    debug_decorator
    PROPERTIES
