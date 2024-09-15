@@ -55,6 +55,6 @@ def communicate(host, port, request):
   # socket is discarded. And the client can detect the end of the the
   # reply by receiving 0 bytes.
   s.send(request)
-  response = s.recv(1024)
+  response = s.recv(1024).decode('utf-8')
   s.close()
   return response

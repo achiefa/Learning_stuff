@@ -33,7 +33,7 @@ NEW_COMMIT_ID=`echo $COMMIT | awk '{ print $2 }'`
 # Check if the new commit matches the previous one.
 # If not, save the latest commit ID in the .commit_id file
 if [ $NEW_COMMIT_ID != $COMMIT_ID ]; then
-  popd >1 /dev/null # Returns to the previous directory
+  popd 1> /dev/null # Returns to the previous directory
   echo $NEW_COMMIT_ID > .commit_id
 fi
 
