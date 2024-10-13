@@ -1,0 +1,17 @@
+<map id="injector.hpp" name="injector.hpp">
+<area shape="rect" id="Node000001" title="Example of dependency injection in c++ using Variadic Templates. Taken from https://gpfault...." alt="" coords="114,5,202,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,153,58,178"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,29,67,47,46,61,28,80,23,94,21,108,25,137,19,138,16,108,18,92,24,78,42,57,65,42,114,24"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="92,153,160,178"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="170,30,188,64,192,85,189,106,175,127,158,145,155,141,171,124,184,104,187,85,183,66,165,33"/>
+<area shape="rect" id="Node000004" href="$type__map_8hpp.html" title="Implementation of the the type map. Type maps are special kind of has table, where keys are types...." alt="" coords="249,79,352,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="184,29,264,69,262,74,181,34"/>
+<area shape="rect" id="Node000007" href="$abstract__object_8hpp.html" title=" " alt="" coords="38,79,174,105"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="152,33,126,68,122,65,147,30"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="224,153,335,178"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="300,106,290,138,285,137,295,104"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="359,153,419,178"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="317,103,364,141,361,145,314,107"/>
+<area shape="poly" id="edge7_Node000007_Node000002" title=" " alt="" coords="95,107,57,144,53,140,92,103"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="112,104,121,137,116,138,107,106"/>
+</map>

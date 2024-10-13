@@ -1,0 +1,15 @@
+<map id="bad_type_map.cpp" name="bad_type_map.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="230,5,361,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,116,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="256,34,116,77,114,71,255,29"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="139,79,192,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="275,34,203,73,200,69,272,29"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="217,79,285,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="290,33,269,67,264,64,286,30"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="309,79,369,105"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="305,30,326,64,321,67,300,33"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="394,79,458,105"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="319,29,392,69,389,74,316,34"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="482,79,554,105"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="334,29,468,72,467,77,332,34"/>
+</map>

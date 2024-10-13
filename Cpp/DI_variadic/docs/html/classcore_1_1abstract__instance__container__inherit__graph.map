@@ -1,0 +1,5 @@
+<map id="core::abstract_instance_container" name="core::abstract_instance_container">
+<area shape="rect" id="Node000001" title="Abstract implementation of objects that will be stored in the type_map. This class does not own the l..." alt="" coords="8,5,166,46"/>
+<area shape="rect" id="Node000002" href="$classcore_1_1instance__container.html" title=" " alt="" coords="5,94,169,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,62,90,94,84,94,84,62"/>
+</map>

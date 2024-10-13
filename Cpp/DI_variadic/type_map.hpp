@@ -11,6 +11,9 @@
  * 
  */
 
+#ifndef TYPE_MAP_HEAEDER_H
+#define TYPE_MAP_HEAEDER_H
+
 #include <unordered_map>
 #include <atomic>
 
@@ -31,6 +34,8 @@ namespace core {
 
     iterator begin() { return _map.begin(); }
     iterator end() { return _map.end(); }
+    const_iterator begin() const { return _map.begin(); }
+    const_iterator end() const { return _map.end(); }
     const_iterator cbegin() const { return _map.cbegin(); }
     const_iterator cend() const { return _map.cend(); }
 
@@ -53,13 +58,13 @@ namespace core {
     template <class Key>
     bool contains() { return _map.contains(type_id<Key>()); }
 
-
-  private:
     template <class Key>
     static int type_id() {
       static int id = ++last_type_id;
       return id;
     }
+
+  private:
 
     static std::atomic<int> last_type_id;
     InternalMap _map;
@@ -70,3 +75,4 @@ namespace core {
 } // namespace core
 
     
+#endif

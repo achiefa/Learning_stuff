@@ -1,0 +1,49 @@
+# Doxyfile.in - Template for Doxygen
+
+# Project name
+PROJECT_NAME           = @PROJECT_NAME@
+PROJECT_NUMBER         = @PROJECT_VERSION@
+
+# Input files (the source code directory)
+INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@
+
+# Output directory (for the generated docs)
+OUTPUT_DIRECTORY       = @DOXYGEN_OUTPUT_DIR@
+
+# Directory for HTML documentation
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+
+# Directory for LaTeX documentation
+GENERATE_LATEX         = NO
+
+# Recursively search directories for source code
+RECURSIVE              = YES
+
+# Extract all documentation from source files
+EXTRACT_ALL            = YES
+
+# Strip code from inline comments
+STRIP_FROM_PATH        = @CMAKE_SOURCE_DIR@
+
+# Use C++ for parsing
+OPTIMIZE_OUTPUT_FOR_C  = NO
+OPTIMIZE_OUTPUT_JAVA   = NO
+OPTIMIZE_FOR_FORTRAN   = NO
+OPTIMIZE_OUTPUT_VHDL   = NO
+
+# Include private and static members in documentation
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+
+# Exclude certain patterns
+EXCLUDE_PATTERNS       = */test/*
+
+# Generate call graphs and dependency graphs (requires Graphviz)
+HAVE_DOT               = YES
+DOT_PATH               = /usr/bin/dot
+GENERATE_CALLGRAPHS    = YES
+GENERATE_DEPENDENCY_GRAPH = YES
+
+# Customize look & feel
+HTML_COLORSTYLE_HUE    = 200

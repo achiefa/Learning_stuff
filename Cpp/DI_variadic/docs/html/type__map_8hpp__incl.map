@@ -1,0 +1,7 @@
+<map id="type_map.hpp" name="type_map.hpp">
+<area shape="rect" id="Node000001" title="Implementation of the the type map. Type maps are special kind of has table, where keys are types...." alt="" coords="64,5,167,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,79,116,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,33,81,68,77,65,104,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="140,79,200,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="126,30,154,65,149,68,122,33"/>
+</map>
